@@ -81,4 +81,7 @@ body {
         grid-template-columns: repeat(4, 22vw);
         grid-template-rows: minmax(26vw, auto) repeat(5, 22vw);
     }
+    *, *:before, *:after {
+        font-size: 2vw;
+    }
 }
