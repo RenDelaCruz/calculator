@@ -84,4 +84,8 @@ body {
     *, *:before, *:after {
         font-size: 5vw;
     }
+
+    button {
+        text-align: center;
+    }
 }
