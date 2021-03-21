@@ -82,10 +82,6 @@ body {
         grid-template-rows: minmax(26vw, auto) repeat(5, 22vw);
     }
     *, *:before, *:after {
-        font-size: 5vw;
-    }
-
-    button {
-        text-align: center;
+        font-size: 3vw;
     }
 }
