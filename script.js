@@ -13,7 +13,7 @@ class Calculator {
     }
 
     delete() {
-        if (this.currentExpr.length === 1) {
+        if (this.currentExpr.length === 1 || this.currentExpr === "Error" || this.currentExpr === "Infinity") {
             this.currentExpr = "0";
         } else {
             this.currentExpr = this.currentExpr.slice(0, -1);
@@ -39,11 +39,13 @@ class Calculator {
     }
 
     calculate() {
-        const current = parseFloat(this.currentExpr);
-        const previous = parseFloat(this.previousExpr);
-        let computation;
+        if (!this.previousExpr) { return; }
 
-        switch(this.operation) {
+        let current = parseFloat(this.currentExpr);
+        let previous = parseFloat(this.previousExpr);
+        let computation = undefined;
+
+        switch (this.operation) {
             case "+":
                 computation = previous + current;
                 break;
@@ -58,13 +60,19 @@ class Calculator {
                 break;
         }
 
+        if (isNaN(computation)) {
+            computation = "Error";
+        }
+
         this.previousExpr = "";
         this.currentExpr = computation;
     }
 
     updateDisplay() {
+        this.currentExpr = this.currentExpr.toString();
+        this.previousExpr = this.previousExpr.toString();
         this.currentExprDisplay.innerText = this.currentExpr;
-        this.previousExprDisplay.innerText = this.previousExpr + ` ${this.operation ? this.operation : ""}`;
+        this.previousExprDisplay.innerText = this.previousExpr ? `${this.previousExpr} ${this.operation}` : "";
     }
 
 }
