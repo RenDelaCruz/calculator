@@ -21,6 +21,8 @@ class Calculator {
     }
 
     appendNumber(number) {
+        if (this.currentExpr === "Error") { return; }
+
         if (!(number === "." && this.currentExpr.includes(".")) && !(number === "0" && this.currentExpr === "0")) {
             if (this.currentExpr === "0" && number !== ".") {
                 this.currentExpr = "";
@@ -60,21 +62,34 @@ class Calculator {
                 break;
         }
 
-        if (isNaN(computation)) {
+        if (Number.isNaN(computation)) {
             computation = "Error";
         }
 
         this.previousExpr = "";
-        this.currentExpr = computation;
+        this.currentExpr = computation.toString();
     }
 
     updateDisplay() {
-        this.currentExpr = this.currentExpr.toString();
-        this.previousExpr = this.previousExpr.toString();
-        this.currentExprDisplay.innerText = this.currentExpr;
-        this.previousExprDisplay.innerText = this.previousExpr ? `${this.previousExpr} ${this.operation}` : "";
+        const curr = this.formatNumber(this.currentExpr);
+        const prev = this.formatNumber(this.previousExpr);
+        this.currentExprDisplay.innerText = curr;
+        this.previousExprDisplay.innerText = this.previousExpr ? `${prev} ${this.operation}` : "";
     }
 
+    formatNumber(number) {
+        let formatted = number.toString();
+
+        if (formatted.includes(".")) {
+            let partitions = formatted.split(".");
+            let wholeNums = parseFloat(partitions[0]).toLocaleString();
+            formatted = wholeNums + "." + partitions[1];
+        } else if (formatted !== "Error"){
+            formatted = parseFloat(formatted).toLocaleString();
+        }
+
+        return formatted;
+    }
 }
 
 const numberButtons = document.querySelectorAll(".num");
