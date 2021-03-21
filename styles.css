@@ -1,0 +1,79 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    /*background: linear-gradient(to right, #00aaff, #00ff6c);*/
+    background-image: url("nebula.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.calc-grid {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+}
+
+/* Blurry elements */
+
+.calc-grid>* {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.calc-grid>button {
+    cursor: pointer;
+    font-size: 2rem;
+    border: none;
+    /*background-color: rgba(255, 255, 255, .75);*/
+    background-color: rgba(250, 250, 250, 0.1);
+}
+
+.calc-grid>button:hover {
+    background-color: rgba(255, 255, 255, .90);
+}
+
+.calc-grid>button:active {
+    color: black;
+}
+
+.selected {
+    color: red;
+    background-color: rgba(255, 255, 255, .90);
+}
+
+.span-2 {
+    grid-column: span 2;
+}
+
+.output {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+    /*background-color: rgba(0, 0, 0, .75);*/
+    background-color: rgba(25, 25, 25, 0.2);
+}
+
+.output .previous-expr {
+    color: rgba(255, 255, 255, .75);
+    font-size: 1.5rem;
+}
+
+.output .current-expr {
+    color: white;
+    font-size: 2.5rem;
+}
